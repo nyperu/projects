@@ -1,5 +1,10 @@
 # projects
 Ödev
+
+
+___________________________________________________________________________________________
+
+
 PROJECT EULER #6
 (function euler006() {
     var max = 100;//100.sayıya kadar devam edeceği için.
@@ -28,6 +33,9 @@ PROJECT EULER #6
     console.log(y - x);
     return y - x; y’den x’i çıkarıp yukarıda yazdırıyoruz. Çözüldü.
   }());
+  
+  
+___________________________________________________________________________________________
 
 
 PROJECT EULER #16
@@ -63,6 +71,10 @@ for(var i = 0; i < 1000; i++)
 }
 
 console.log(sum);
+
+
+___________________________________________________________________________________________
+
 
 
 PROJECT EULER #26
@@ -122,6 +134,10 @@ var getCycleSize = function(num){
 console.log(getLongestUnitFractionRecurringCycle(10));
 console.log(getLongestUnitFractionRecurringCycle(1000));    
 
+
+___________________________________________________________________________________________
+
+
 Project Euler #36    
 Fonksiyona verilen a sayısının içerisindeki palindromik sayıları bulur ve bunların toplamını döndürür.
 function isPalindromic(a) {
@@ -144,3 +160,28 @@ function findPalindromicNumbersSum(max) {
 
 console.log( findPalindromicNumbersSum(1000000) );
 
+___________________________________________________________________________________________
+
+PROJECT EULER #56
+100 üzeri 100'ün rakamları toplamını aldırıyoruz.
+var big = require('big.js')
+	var _ = require('lodash')
+	require('should')
+	
+	function digitalSum(numberString) {
+	  return _.sum(numberString.toString().split('').map(Number))
+	}
+	digitalSum('5231').should.eql(11)
+	
+	var upperBound = 101
+	var a, b, sum
+	var max = {a: 1, b: 1, digitalSum: 1}
+	for (a = 1; a < upperBound; a++) {
+	  for (b = 1; b < upperBound; b++) {
+	    sum = digitalSum(big(a).pow(b).toFixed())
+	    if (sum > max.digitalSum) {
+	      console.log(a, b, sum) // 99 95 972
+	      max = {a: a, b: b, digitalSum: sum}
+	    }
+	  }
+	}
