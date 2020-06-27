@@ -125,3 +125,18 @@ var plusOne = function(digits) {
  
    return digits;
 };
+
+LEETCODEE #26
+Bir önceki elemanla aynımıyım diye kontrol ediyor. Eğer aynıysa indisini geriye gönderiyor.
+
+const removeDuplicates = function removeDuplicates(nums) {
+  let i = 0;
+  for (let j = 1; j < nums.length; j += 1) {
+    if (nums[i] !== nums[j]) {
+      i += 1;
+      nums[i] = nums[j];
+    }
+  }
+  return i + 1;
+};
+
