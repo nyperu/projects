@@ -1,0 +1,127 @@
+LEETCODE #6
+/**
+ * Time complexity: O(n). Space complexity: O(n).
+ * Note to self: Next, try using just string instead of array in rows array.
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+var convert = function(s, numRows) {
+    if (numRows <= 1) return s;
+
+    var currentRowIndex = 0;
+    var headingDown = true;
+    var firstRowIndex = 0;
+    var lastRowIndex = numRows - 1;
+    
+    // zig zagged değerlerini satırlarda tutmak için 2d dizisi oluşturma
+    var rows = []; 
+    for (var i = 0; i < numRows; i++) {
+        rows.push([]);
+    }
+    
+    for (var j = 0; j < s.length; j++) {
+        var char = s[j];
+        
+        rows[currentRowIndex].push(char);
+        
+        if (headingDown) {
+           if ((currentRowIndex + 1) > lastRowIndex) {
+               headingDown = false; // Yönü değiştiriyorum
+               currentRowIndex--;
+           } else {
+               currentRowIndex++;
+           }
+        } else if (!headingDown) {
+            if ((currentRowIndex - 1) < firstRowIndex) {
+                headingDown = true;
+                currentRowIndex++;
+            } else {
+                currentRowIndex--;
+            }
+        }
+    }
+    //satırları sırayla bitiştir ve dönüştürülen dizeyi döndür
+
+    return rows.reduce(function (result, row) {
+        return result + row.join('');
+    }, '');
+};
+
+console.log(convert('PAYPALISHIRING', 3)); // PAHNAPLSIIGYIR
+console.log(convert('PAYPALISHIRING', 2)); // 
+console.log(convert('PAYPALISHIRING', 1)); // PAYPALISHIRING
+
+
+LEETCODE #16
+/**
+
+@param {number[]} nums
+
+@param {number} target
+
+@return {number}
+*/
+var threeSumClosest = function(nums, target) {
+    if(nums.length < 3 || target == null) return;
+    var res = target - nums[0] - nums[1] - nums[2], len = nums.length;
+    
+    nums.sort((a,b) => a - b);
+    
+    for(var i = 0; i < len - 2; i++){
+    var L = i+1, R = len-1;
+    
+     while(L < R){ 
+         var sum = nums[i] + nums[L] + nums[R];
+         if(sum === target){
+             return sum;
+         }else if(sum < target){
+             while(nums[L] === nums[++L]);
+         }else{
+             while(nums[R] === nums[--R]);
+         }
+         
+         if(Math.abs(target - sum) < Math.abs(res)){
+             res = target - sum;
+         }
+     }
+    }
+    
+    return target - res;
+    };
+
+
+LEETCODE #66
+
+var plusOne = function(digits) {
+
+    // her şeyden önce addone yapmalıyız
+  var addOneNow = true;  
+
+    // SON SAYIDAN BAŞLIYORUM
+  for (var i = digits.length - 1; i >= 0;i--){
+
+    // EĞER SON SAYI 0İLE8 ARASINDAYSA 
+    if ( digits[i] < 9){
+
+      // son sayıyı 1 arttırıyorum
+      digits[i]++;
+
+       // biter
+      return digits;
+    }else{ // eğer son digit 9 ise onu 0 yapacağız
+     
+    //  0 yapıyoruz, and ve son element olarak yazacağız
+     digits[i] = 0; 
+    }
+   }
+  
+   // hala 1 eklememiz gerekiyorsa
+   if(addOneNow){ 
+   
+   // [9,9,9]'u, [1,0,0,0] yap, [0,0,0] değil
+     digits.unshift(1); 
+   }
+ 
+   return digits;
+};
