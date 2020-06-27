@@ -1,0 +1,124 @@
+# projects
+Ödev
+PROJECT EULER #6
+(function euler006() {
+    var max = 100;//100.sayıya kadar devam edeceği için.
+    var x = 0;
+    var y = 0;
+    var i = 0;
+    var j = 0;
+  
+    (function sumOfSquares() {
+      while (i <= max) {
+        x += Math.pow(i, 2);//i’nin 2.kuvvetini aldırıyorum
+        i++;//i yi arttırıp while’a devam ediyorum
+      }
+      return x;
+    }());
+  
+    (function squareOfSums() {
+      while (j <= max) {
+        y += j; // 100.sayıya kadar y’yi y+1 ile topluyoruz. 1+2+3+4+5…+100
+        j++;
+      }
+      y = Math.pow(y, 2); (1+2+3+4+5…+100)^2 yapıyoruz.
+      return y;
+    }());
+  
+    console.log(y - x);
+    return y - x; y’den x’i çıkarıp yukarıda yazdırıyoruz. Çözüldü.
+  }());
+
+
+PROJECT EULER #16
+var number = [1], sum = 0; //numarayı küme olarak verdim. 0.+1.+2.+3... diyebilmek için.
+
+for(var i = 0; i < 1000; i++)//1000.üste kadar devam ettiriyorum.
+{
+    var overflow = 0, count = number.length + 1//numara uzunluğuna 1 ekleyip sayma değişkenine yazıyorum.
+
+    for(var j = 0; j < count; j++)
+    {
+        var digit = number[j] || 0;
+
+        digit = 2 * digit + overflow;//digiti 2ile çarpıp bir önceki haliyle topluyorum.
+
+        if(digit > 9)
+        {
+            digit -= 10;
+            overflow = 1;
+        }
+        else
+        {
+            overflow = 0;
+        }
+
+        number[j] = digit;
+    }
+}
+
+for(var i = 0; i < 1000; i++)
+{
+    sum += number[i];//Numarayı dizi yapmıştık. Dizinin her elemanını topluyoruz. 1366 sayısını elde ediyoruz.
+}
+
+console.log(sum);
+
+
+PROJECT EULER #26
+
+var getLongestUnitFractionRecurringCycle = function(maxNum){
+    var longestNum = 1;
+    var largestCycleSize = 1;
+    
+    for(var currentNum = longestNum + 1; currentNum <= maxNum; currentNum++){
+        var cycleSize = getCycleSize(currentNum);
+        
+        if(cycleSize > largestCycleSize){
+            largestCycleSize = cycleSize;
+            longestNum = currentNum;
+        }
+    }
+    
+    return longestNum ;
+};
+
+var getCycleSize = function(num){
+    var numerator = 1;
+    var numerators = [];
+    var numeratorDigits = [];
+    
+    while(!digitsInSequence){
+        if(numerator == 0){
+            return 0;
+        }
+        
+        //Check if the numerator is previously repeated
+        for(var i = 0; i < numerators.length; i++){
+            if(numerator == numerators[i]){
+                var digitsInSequence = 0;
+                
+                for(var j = i; j < numerators.length; j++){
+                    digitsInSequence += numeratorDigits[j];
+                }
+                
+                return digitsInSequence;
+            }
+        }
+        
+        //Repeat not found, update the numerators and digits
+        numerators[numerators.length] = numerator;
+        var digits = 1;
+        while(num > numerator){
+            numerator *= 10;
+            digits++;
+        }
+        numeratorDigits[numeratorDigits.length] = digits;
+        
+        //get the next numerator
+        numerator = numerator % num;
+    }
+};
+console.log(getLongestUnitFractionRecurringCycle(10));
+console.log(getLongestUnitFractionRecurringCycle(1000));    
+    
